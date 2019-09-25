@@ -13,6 +13,16 @@ class Block{
 
         return genesisBlock;
     }
+
+    static mineBlock({lastBlock,data}){
+        const minedBlock = new Block({
+            timestamp: Date.now(),
+            data,
+            lastHash: lastBlock.hash,
+        });
+
+        return minedBlock;
+    }
 }
 
 module.exports = Block;
