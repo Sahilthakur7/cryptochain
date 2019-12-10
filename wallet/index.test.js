@@ -65,7 +65,7 @@ describe('Wallet', () => {
             });
 
             it('outputs the amount to the recipient', () => {
-                expect(transaction.ouputMap.recipient).toEqual(amount);
+                expect(transaction.outputMap[recipient]).toEqual(amount);
             });
         });
     })
