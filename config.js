@@ -11,5 +11,11 @@ const GENESIS_DATA = {
     difficulty: INITIAL_DIFFICULTY
 };
 
+const REWARD_INPUT = {
+    address: '*authorized-reward*'
+};
 
-module.exports = { GENESIS_DATA , MINE_RATE , STARTING_BALANCE };
+const MINING_REWARD = 50;
+
+
+module.exports = { GENESIS_DATA , MINE_RATE , STARTING_BALANCE , MINING_REWARD, REWARD_INPUT };
