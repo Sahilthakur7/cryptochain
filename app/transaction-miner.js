@@ -1,3 +1,5 @@
+const Transaction = require('../Wallet/transaction');
+
 class TransactionMiner {
     constructor({blockchain,transactionPool,wallet,pubsub}){
         this.blockchain = blockchain;
@@ -7,12 +9,16 @@ class TransactionMiner {
 
     }
 
-    mineTransaction(){
-        //Get valid transactions from the pool
-        //Generate the miner's reward
-        //add a block consisting of these transactions to the blockchain
-        //broadcast the updated blockchain
-        //clear the transaction pool
+    mineTransactions(){
+        const validTransactions = this.transactionPool.validTransactions();
+
+        validTransactions.push(Transaction.rewardTransaction({minerWallet: this.wallet}));
+
+        this.blockchain.addBlock({data: validTransactions});
+
+        this.pubsub.broadcastChain();
+
+        this.transactionPool.clear();
     };
 };
 
