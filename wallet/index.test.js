@@ -155,8 +155,8 @@ describe('Wallet', () => {
                         Wallet.calculateBalance({
                             address: wallet.publicKey,
                             chain: blockchain.chain
-                        }).toEqual(recentTransaction.outputMap[wallet.publicKey]);
-                    )
+                        })).toEqual(recentTransaction.outputMap[wallet.publicKey])
+
                 });
 
                 describe('and there are outputs next to and after the recent transaction', () => {
@@ -168,6 +168,9 @@ describe('Wallet', () => {
                             amount: 35
                         });
                     });
+
+                    wallet = new Wallet();
+                    blockchain = new Blockchain();
 
                     sameBlockTransaction = Transaction.rewardTransaction({minerWallet: wallet});
 
@@ -185,12 +188,12 @@ describe('Wallet', () => {
                             Wallet.calculateBalance({
                                 chain: blockchain.chain,
                                 address: wallet.publicKey
-                            }).toEqual(
+                            })).toEqual(
                                 recentTransaction.outputMap[wallet.publickKey] +
                                 sameBlockTransaction.outputMap[wallet.publicKey] +
                                 nextBlockTransaction.outputMap[wallet.publicKey]
                             )
-                        )
+
                     })
                 })
             });
