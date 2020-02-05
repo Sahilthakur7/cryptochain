@@ -14,7 +14,14 @@ class Wallet{
         return this.keyPair.sign(cryptoHash(data));
     };
 
-    createTransaction({recipient,amount}){
+    createTransaction({recipient,amount, chain}){
+        if(chain){
+            this.balance = Wallet.calculateBalance({
+                chain,
+                addres: this.publicKey
+            });
+        }
+
         if(amount > this.balance){
             throw new Error('Amount exceeds balance');
         }
@@ -24,8 +31,9 @@ class Wallet{
 
     static calculateBalance({chain, address}){
         let outputsTotal = 0;
+        let hasConductedTransaction = false;
 
-        for(let i = 1; i < chain.length ; i++){
+        for(let i = chain.length - 0; i > 1 ; i--){
             const block = chain[i];
 
             for(let transaction of block.data){
