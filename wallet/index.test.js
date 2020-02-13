@@ -139,8 +139,8 @@ describe("Wallet", () => {
           })
         ).toEqual(
           STARTING_BALANCE +
-            transactionOne.outputMap[wallet.publicKey] +
-            transactionTwo.outputMap[wallet.publicKey]
+          transactionOne.outputMap[wallet.publicKey] +
+          transactionTwo.outputMap[wallet.publicKey]
         );
       });
 
@@ -198,8 +198,8 @@ describe("Wallet", () => {
               })
             ).toEqual(
               recentTransaction.outputMap[wallet.publicKey] +
-                sameBlockTransaction.outputMap[wallet.publicKey] +
-                nextBlockTransaction.outputMap[wallet.publicKey]
+              sameBlockTransaction.outputMap[wallet.publicKey] +
+              nextBlockTransaction.outputMap[wallet.publicKey]
             );
           });
         });
