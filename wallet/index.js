@@ -53,8 +53,6 @@ class Wallet {
       }
     }
 
-    console.log("ouputstoata", outputsTotal);
-
     return hasConductedTransaction
       ? outputsTotal
       : STARTING_BALANCE + outputsTotal;
