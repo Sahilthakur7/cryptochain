@@ -43,7 +43,7 @@ class Transaction{
     }
 
     static validTransaction(transaction){
-        const {input, outputMap} = transaction;
+        const {input, outputMap = {}} = transaction;
         const {address,amount,signature} = input;
 
         const outputTotal = Object.values(outputMap).reduce((acc,item) => acc+item, 0);
