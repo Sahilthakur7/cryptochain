@@ -207,9 +207,9 @@ describe("blockchain", () => {
                 it("returns false", () => {
                     rewardTransaction.outputMap[wallet.publicKey] = 99999;
 
-                    newChain.addBlock({data: [transaction, rewardTransaction]});
+                    newChain.addBlock({ data: [transaction, rewardTransaction] });
                     expect(
-                        blockchain.validTransactionData({chain: newChain.chain})
+                        blockchain.validTransactionData({ chain: newChain.chain })
                     ).toBe(false);
                 });
             });
@@ -233,15 +233,19 @@ describe("blockchain", () => {
                     }
                 };
 
-                newChain.addBlock({data: [evilTransaction, rewardTransaction]});
+                newChain.addBlock({ data: [evilTransaction, rewardTransaction] });
                 expect(
-                    blockchain.validTransactionData({chain: newChain.chain})
+                    blockchain.validTransactionData({ chain: newChain.chain })
                 ).toBe(false);
             });
         });
 
         describe("and the block contains duplicate transactions", () => {
-            it("returns false", () => {});
+            it("returns false", () => {
+                newChain.addBlock({ data: [transaction, transaction, transaction, rewardTransaction] });
+
+                expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
+            });
         });
     });
 });

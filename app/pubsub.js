@@ -6,8 +6,8 @@ const CHANNELS = {
     TRANSACTION: "TRANSACTION"
 };
 
-class PubSub{
-    constructor({ blockchain, transactionPool }){
+class PubSub {
+    constructor({ blockchain, transactionPool }) {
         this.blockchain = blockchain;
         this.transactionPool = transactionPool;
         this.publisher = redis.createClient();
@@ -15,31 +15,31 @@ class PubSub{
 
         this.subscribeToChannels();
 
-        this.subscriber.on('message', (channel,message) => {
-            this.handleMessage(channel,message);
+        this.subscriber.on('message', (channel, message) => {
+            this.handleMessage(channel, message);
         })
     }
 
-    subscribeToChannels(){
+    subscribeToChannels() {
         Object.values(CHANNELS).forEach((channel) => {
             this.subscriber.subscribe(channel);
         })
     }
 
-    publish({channel,message}){
-        this.subscriber.unsubscribe(channel,() => {
-            this.publisher.publish(channel,message, () => {
+    publish({ channel, message }) {
+        this.subscriber.unsubscribe(channel, () => {
+            this.publisher.publish(channel, message, () => {
                 this.subscriber.subscribe(channel);
             });
         });
     }
 
-    handleMessage(channel,message){
+    handleMessage(channel, message) {
         const parsedMessage = JSON.parse(message);
 
-        switch(channel){
+        switch (channel) {
             case CHANNELS.BLOCKCHAIN:
-                this.blockchain.replaceChain(parsedMessage , () => {
+                this.blockchain.replaceChain(parsedMessage, true, () => {
                     this.transactionPool.clearBlockchainTransactions({
                         chain: parsedMessage
                     });
@@ -54,14 +54,14 @@ class PubSub{
 
     }
 
-    broadcastChain(){
+    broadcastChain() {
         this.publish({
             channel: CHANNELS.BLOCKCHAIN,
             message: JSON.stringify(this.blockchain.chain)
         })
     }
 
-    broadcastTransaction(transaction){
+    broadcastTransaction(transaction) {
         this.publish({
             channel: CHANNELS.TRANSACTION,
             message: JSON.stringify(transaction)
