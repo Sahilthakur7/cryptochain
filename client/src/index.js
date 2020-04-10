@@ -1,4 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './Components/App';
 
-render(<div>Cryptochain in react ! Live update</div>, document.querySelector("#app"));
+render(<App />, document.querySelector("#app"));
