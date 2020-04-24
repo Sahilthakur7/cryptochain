@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Blocks from './Blocks';
 
 class App extends Component {
   state = {
@@ -17,8 +18,13 @@ class App extends Component {
     const { address, balance } = this.state.walletInfo;
     return (
       <div>
-        Welcome to the chain
-    <div>Address: {address} , balance: {balance}</div>
+        <div>
+          Welcome to the chain
+        </div>
+        <div>Address: {address}</div>
+        <div> balance: {balance}</div>
+        <br />
+        <Blocks />
       </div>
     )
   }
