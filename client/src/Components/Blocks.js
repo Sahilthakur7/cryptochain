@@ -15,7 +15,9 @@ class Blocks extends Component {
     const { blocks } = this.state;
     const toReturn = blocks.map(block => {
       return (
-        <div key={block.hash}>
+        <div key={block.hash}
+          className="Block"
+        >
           <div>{block.hash}</div>
         </div>
       )
