@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Block from './Block';
 
 class Blocks extends Component {
   state = {
@@ -18,7 +19,7 @@ class Blocks extends Component {
         <div key={block.hash}
           className="Block"
         >
-          <div>{block.hash}</div>
+          <Block key={block.hash} block={block} />
         </div>
       )
     })
