@@ -28327,9 +28327,23 @@ var Block = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(Block);
 
   function Block() {
+    var _this;
+
+    var _temp;
+
     _classCallCheck(this, Block);
 
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _super.call.apply(_super, [this].concat(args)), _this.state = {
+      displayTransaction: false
+    }, _this.toggleTransaction = function () {
+      _this.setState({
+        displayTransaction: !_this.state.displayTransaction
+      });
+    }, _temp));
   }
 
   _createClass(Block, [{
@@ -28337,14 +28351,19 @@ var Block = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this$props$block = this.props.block,
           timestamp = _this$props$block.timestamp,
-          data = _this$props$block.data,
           hash = _this$props$block.hash;
       var hashDisplay = "".concat(hash.substring(0, 15), "...");
-      var stringifiedData = JSON.stringify(data);
-      var dataDisplay = stringifiedData.length > 35 ? "".concat(stringifiedData.substring(0, 35), "...") : stringifiedData;
       return _react.default.createElement("div", {
         className: "block"
-      }, _react.default.createElement("div", null, "Hash: ", hashDisplay), _react.default.createElement("div", null, "Time: ", new Date(timestamp).toLocaleString()), _react.default.createElement("div", null, "Data: ", dataDisplay));
+      }, _react.default.createElement("div", null, "Hash: ", hashDisplay), _react.default.createElement("div", null, "Time: ", new Date(timestamp).toLocaleString()), this.displayTransaction);
+    }
+  }, {
+    key: "displayTransaction",
+    get: function get() {
+      var data = this.props.block.data;
+      var stringifiedData = JSON.stringify(data);
+      var dataDisplay = stringifiedData.length > 35 ? "".concat(stringifiedData.substring(0, 35), "...") : stringifiedData;
+      return _react.default.createElement("div", null, "Data: ", dataDisplay);
     }
   }]);
 
