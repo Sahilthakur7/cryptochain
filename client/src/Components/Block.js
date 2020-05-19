@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 class Block extends Component {
 
@@ -19,7 +20,10 @@ class Block extends Component {
 
     return (
       <div>
-        Data: {dataDisplay}
+        <div>
+          Data: {dataDisplay}
+        </div>
+        <Button bsSize="small" bsStyle="danger">Show More</Button>
       </div>
     )
   }
