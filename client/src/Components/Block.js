@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
+import Transaction from './Transaction';
+
 class Block extends Component {
 
   state = {
@@ -18,12 +20,32 @@ class Block extends Component {
     const stringifiedData = JSON.stringify(data);
     const dataDisplay = stringifiedData.length > 35 ? `${stringifiedData.substring(0, 35)}...` : stringifiedData;
 
+    if (this.state.displayTransaction) {
+      return (
+        <div>
+          <div>
+            {
+              data.map(transaction => {
+                return (
+                  <div key={transaction._id}>
+                    <hr />
+                    <Transaction transaction={transaction} />
+                  </div>
+                )
+              })
+            }
+          </div>
+          <Button bsSize="small" bsStyle="danger" onClick={this.toggleTransaction}>Show Less</Button>
+        </div>
+      )
+    }
+
     return (
       <div>
         <div>
           Data: {dataDisplay}
         </div>
-        <Button bsSize="small" bsStyle="danger">Show More</Button>
+        <Button bsSize="small" bsStyle="danger" onClick={this.toggleTransaction}>Show More</Button>
       </div>
     )
   }
