@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Blocks from './Blocks';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -25,12 +25,13 @@ class App extends Component {
           Welcome to the chain
         </div>
         <br />
+        <div> <Link to="/blocks"> Blocks </Link></div>
+        <br />
         <div className="walletInfo">
           <div>Address: {address}</div>
           <div> balance: {balance}</div>
         </div>
         <br />
-        <Blocks />
       </div>
     )
   }

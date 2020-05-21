@@ -32,3 +32,8 @@ body {
 .transaction {
   padding: 5%;
 }
+
+a, a:hover {
+  color: yellow;
+  text-decoration: underline;
+}
