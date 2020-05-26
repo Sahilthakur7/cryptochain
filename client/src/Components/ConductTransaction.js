@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl } from 'react-bootstrap';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class ConductTransaction extends Component {
@@ -18,10 +18,23 @@ class ConductTransaction extends Component {
     })
   }
 
+  conductTransaction = () => {
+    const { recipient, amount } = this.state;
+
+    fetch('http://localhost:3000/api/transact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ recipient, amount })
+    }).then(response => response.json())
+      .then(json => {
+        alert(json.message || json.type);
+      })
+  }
+
   render() {
     const { amount, recipient } = this.state;
     return (
-      <div className="conduction-transaction">
+      <div className="conduct-transaction">
         <Link to="/">Home</Link>
         <h3>Conduct A Transaction</h3>
         <FormGroup>
@@ -38,6 +51,13 @@ class ConductTransaction extends Component {
             value={amount}
           />
         </FormGroup>
+        <div>
+          <Button bsStyle="danger"
+            onClick={this.conductTransaction}
+          >
+            Submit
+            </Button>
+        </div>
       </div>
     )
   }
